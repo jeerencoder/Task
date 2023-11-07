@@ -44,25 +44,41 @@ const app = () => {
         />
       </View>
 
-      {/* <View
-        style={{
-          flex: 1,
-          padding: 10,
-          margin: 10,
-          backgroundColor: '#000',
-          width: 100,
-        }}>
-        <View>
-          <Image
-            source={require('images.jpeg')}
-            style={{width: 100, height: 100}}
-          />
+      {ListData.map((item, index) => (
+        // console.log(item)
+        <View
+          style={{
+            padding: 10,
+            margin: 10,
+            // backgroundColor: '#000',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <View style={{}}>
+            <Image source={item.image} style={{width: 100, height: 100}} />
+          </View>
+          <View style={{ }}>
+            <Text style={styles.title}>{item?.name}</Text>
+            {item?.category === null ? (
+              ''
+            ) : (
+              <Text style={styles.title}>{item?.category}</Text>
+            )}
+          
+            {
+              item?.description == null ? null :
+                <Text style={[styles.title ,{backgroundColor:"pink"}]}>{item?.description}</Text>
+              
+            }
+            <Text style={styles.title}>{item?.Price}</Text>
+            <Text style={styles.title}>{item?.quantity}</Text>
+          </View>
+          <View style={{alignSelf: 'flex-start'}}>
+            <Text style={styles.title}>{item.Price}</Text>
+          </View>
         </View>
-        <View></View>
-        <View>
-          <Text style={styles.title}>hiih</Text>
-        </View>
-      </View> */}
+      ))}
 
       {/* <View>
         <FlatList

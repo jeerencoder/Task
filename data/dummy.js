@@ -1,7 +1,7 @@
 export const ListData = [
   {
     id: 1,
-    image: 'L1.png',
+    image: require('../src/Assets/Image/L1.png'),
     name: 'Britannia Whole Wheat',
     category: 'Brown Bread',
     description: '',
@@ -12,10 +12,10 @@ export const ListData = [
 
   {
     id: 2,
-    image: 'L2.png',
+    image: require('../src/Assets/Image/L2.png'),
     name: 'Britannia Brown Bread',
-    category: '',
-    description: '',
+    category: null,
+    description: null,
     Price: 50.0,
     quantity: '250 Gms',
     add: false,
@@ -23,7 +23,7 @@ export const ListData = [
 
   {
     id: 3,
-    image: 'L1.png',
+    image: require('../src/Assets/Image/L3.png'),
     name: 'Britannia Atta Bread',
     category: '',
     description: 't ingredients, soft and fresh loaded.....',
@@ -34,7 +34,7 @@ export const ListData = [
 
   {
     id: 4,
-    image: 'L1.png',
+    image: require('../src/Assets/Image/L4.png'),
     name: 'Britannia Atta Bread',
     category: '',
     description:
@@ -47,7 +47,7 @@ export const ListData = [
   {
     id: 5,
     image: 'L1.png',
-    name: 'Britannia Brown Bread',
+    image: require('../src/Assets/Image/L4.png'),
     category: '',
     description: '',
     Price: 50.0,
