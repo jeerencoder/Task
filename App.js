@@ -53,10 +53,10 @@ const app = () => {
 
   const renderProducts = ({item}) => (
     <View key={item.id} style={styles.VerticalContainer}>
-      <View style={{width: '25%'}}>
-        <Image source={item.image} style={{width: 90, height: 90}} />
+      <View style={styles.VContA}>
+        <Image source={item.image} style={styles.renderImage} />
       </View>
-      <View style={{width: '60%', paddingLeft: 10}}>
+      <View style={styles.VContB}>
         <Text style={styles.name}>{item?.name}</Text>
         {item?.category === null ? null : (
           <Text style={styles.category}>{item?.category}</Text>
@@ -69,14 +69,11 @@ const app = () => {
       </View>
       <TouchableOpacity
         onPress={() => toggleItemCart(item.id)}
-        style={{
-          alignSelf: 'flex-start',
-          width: '15%',
-        }}>
+        style={styles.VContC}>
         <View style={styles.AddButton}>
           <Image
             source={require('./src/Assets/icons/add.png')}
-            style={{width: 10, height: 10, paddingRight: 1}}
+            style={styles.AddIcon}
           />
           <Text style={styles.Button}>{'Add'}</Text>
         </View>
@@ -87,24 +84,18 @@ const app = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.NavBar}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={styles.backView}>
           <TouchableOpacity onPress={() => console.log('goback')}>
             <Image
               source={require('./src/Assets/icons/main-back.png')}
-              style={{width: 30, height: 25}}
+              style={styles.backIcon}
               resizeMode="contain"
             />
           </TouchableOpacity>
-          <Text style={{fontSize: 25, marginLeft: 15, color: '#000'}}>
-            Products
-          </Text>
+          <Text style={styles.backTitle}>Products</Text>
         </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
+        <View style={styles.iconCont}>
           <Image
             source={require('./src/Assets/icons/search.png')}
             style={styles.searchIcon}
@@ -116,13 +107,13 @@ const app = () => {
           />
           {cartCount === 0 ? null : (
             <View style={styles.cartBadge}>
-              <Text style={{fontSize: 15, color: '#fff'}}>{cartCount}</Text>
+              <Text style={styles.cartCount}>{cartCount}</Text>
             </View>
           )}
         </View>
       </View>
 
-      <View style={{marginTop: 15}}>
+      <View style={styles.ListA}>
         <FlatList
           showsHorizontalScrollIndicator={false}
           data={HeaderData}
@@ -132,7 +123,7 @@ const app = () => {
         />
       </View>
 
-      <View style={{marginBottom: 150}}>
+      <View style={styles.ListB}>
         <FlatList
           data={ListData}
           renderItem={renderProducts}
@@ -246,4 +237,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  VContA: {
+    width: '25%',
+  },
+  VContB: {
+    width: '60%',
+    paddingLeft: 10,
+  },
+  VContC: {
+    alignSelf: 'flex-start',
+    width: '15%',
+  },
+  AddIcon: {
+    width: 10,
+    height: 10,
+    paddingRight: 1,
+  },
+  renderImage: {width: 90, height: 90},
+  cartCount: {fontSize: 15, color: '#fff'},
+  backTitle: {fontSize: 25, marginLeft: 15, color: '#000'},
+  iconCont: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backIcon: {width: 30, height: 25},
+  backView: {flexDirection: 'row', alignItems: 'center'},
+  ListA: {marginTop: 15},
+  ListB: {marginBottom: 150},
 });

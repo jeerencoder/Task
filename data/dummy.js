@@ -34,7 +34,7 @@ export const ListData = [
 
   {
     id: 4,
-    image: require('../src/Assets/Image/L4.png'),
+    image: require('../src/Assets/Image/L1.png'),
     name: 'Britannia Atta Bread',
     category: null,
     description:
@@ -46,7 +46,7 @@ export const ListData = [
 
   {
     id: 5,
-    image: require('../src/Assets/Image/L4.png'),
+    image: require('../src/Assets/Image/L3.png'),
     category: null,
     description: null,
     Price: 50.0,
