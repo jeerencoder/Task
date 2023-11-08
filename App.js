@@ -15,12 +15,15 @@ const app = () => {
   const [cartCount, setCartCount] = useState(0);
   const [selected, setSelected] = useState(null);
 
-  console.log(selected);
-
-  const AddToCart = item => {
-    console.log(item, 'it');
-    setCart([...cart, item]);
-    setCartCount(cart.length);
+  const toggleItemCart = item => {
+    if (cart.includes(item)) {
+      const updatedCart = cart.filter(cartItem => cartItem !== item);
+      setCart(updatedCart);
+      setCartCount(cartCount - 1);
+    } else {
+      setCart([...cart, item]);
+      setCartCount(cartCount + 1);
+    }
   };
 
   const renderItem = ({item}) => (
@@ -48,8 +51,8 @@ const app = () => {
     </TouchableOpacity>
   );
 
-  const renderVerticle = ({item}) => (
-    <View key={item.id} style={styles.rendervContainer}>
+  const renderProducts = ({item}) => (
+    <View key={item.id} style={styles.VerticalContainer}>
       <View style={{width: '25%'}}>
         <Image source={item.image} style={{width: 90, height: 90}} />
       </View>
@@ -65,21 +68,12 @@ const app = () => {
         <Text style={styles.quantity}>{item?.quantity}</Text>
       </View>
       <TouchableOpacity
-        onPress={() => AddToCart(item.id)}
+        onPress={() => toggleItemCart(item.id)}
         style={{
           alignSelf: 'flex-start',
           width: '15%',
         }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            borderRadius: 20,
-            borderWidth: 1,
-            borderColor: '#c2c2c238',
-            padding: 1,
-            justifyContent: 'center',
-          }}>
+        <View style={styles.AddButton}>
           <Image
             source={require('./src/Assets/icons/add.png')}
             style={{width: 10, height: 10, paddingRight: 1}}
@@ -92,25 +86,18 @@ const app = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          width: '100%',
-          height: 50,
-          paddingHorizontal: 10,
-          justifyContent: 'space-between',
-          borderBottomWidth: 1,
-          borderBottomColor: '#000',
-        }}>
+      <View style={styles.NavBar}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log('goback')}>
             <Image
               source={require('./src/Assets/icons/main-back.png')}
               style={{width: 30, height: 25}}
               resizeMode="contain"
             />
           </TouchableOpacity>
-          <Text style={{fontSize: 25, marginLeft: 15}}>Products</Text>
+          <Text style={{fontSize: 25, marginLeft: 15, color: '#000'}}>
+            Products
+          </Text>
         </View>
 
         <View
@@ -120,38 +107,16 @@ const app = () => {
           }}>
           <Image
             source={require('./src/Assets/icons/search.png')}
-            style={{
-              width: 35,
-              height: 35,
-              paddingRight: 1,
-              resizeMode: 'contain',
-            }}
+            style={styles.searchIcon}
           />
 
           <Image
             source={require('./src/Assets/icons/Group.png')}
-            style={{
-              width: 35,
-              height: 35,
-              marginHorizontal: 10,
-              position: 'relative',
-              resizeMode: 'contain',
-            }}
+            style={styles.cartIcon}
           />
           {cartCount === 0 ? null : (
-            <View
-              style={{
-                position: 'absolute',
-                top: 1,
-                right: 1,
-                backgroundColor: 'red',
-                borderRadius: 50,
-                width: 20,
-                height: 20,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 15, color: '#fff'}}>{cartCount + 1}</Text>
+            <View style={styles.cartBadge}>
+              <Text style={{fontSize: 15, color: '#fff'}}>{cartCount}</Text>
             </View>
           )}
         </View>
@@ -170,7 +135,7 @@ const app = () => {
       <View style={{marginBottom: 150}}>
         <FlatList
           data={ListData}
-          renderItem={renderVerticle}
+          renderItem={renderProducts}
           keyExtractor={item => item.id}
         />
       </View>
@@ -205,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#06D6A0',
   },
-  rendervContainer: {
+  VerticalContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -238,5 +203,47 @@ const styles = StyleSheet.create({
   quantity: {
     fontSize: 15,
     color: '#c2c2c2',
+  },
+  AddButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#c2c2c238',
+    padding: 1,
+    justifyContent: 'center',
+  },
+  NavBar: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 50,
+    paddingHorizontal: 10,
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+  },
+  searchIcon: {
+    width: 35,
+    height: 35,
+    paddingRight: 1,
+    resizeMode: 'contain',
+  },
+  cartIcon: {
+    width: 35,
+    height: 35,
+    marginHorizontal: 10,
+    position: 'relative',
+    resizeMode: 'contain',
+  },
+  cartBadge: {
+    position: 'absolute',
+    top: 1,
+    right: 1,
+    backgroundColor: 'red',
+    borderRadius: 50,
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
