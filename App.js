@@ -13,7 +13,7 @@ import {ListData, HeaderData} from './data/dummy';
 const app = () => {
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(1);
 
   const toggleItemCart = item => {
     if (cart.includes(item)) {
